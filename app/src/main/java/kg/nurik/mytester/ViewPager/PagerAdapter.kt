@@ -1,8 +1,9 @@
-package kg.nurik.mytester
+package kg.nurik.mytester.ViewPager
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import kg.nurik.mytester.R
 
 class PagerAdapter(private val listener: PagerListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() { // мы указали родительский класс , который может принимать другой вьюХолдер

@@ -1,8 +1,10 @@
-package kg.nurik.mytester
+package kg.nurik.mytester.main
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import kg.nurik.mytester.question.QuestionsActivity
+import kg.nurik.mytester.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

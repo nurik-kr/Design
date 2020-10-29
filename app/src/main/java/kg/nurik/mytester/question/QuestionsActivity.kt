@@ -1,7 +1,13 @@
-package kg.nurik.mytester
+package kg.nurik.mytester.question
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import kg.nurik.mytester.ViewPager.PagerAdapter
+import kg.nurik.mytester.ViewPager.PagerListener
+import kg.nurik.mytester.R
+import kg.nurik.mytester.result.ResultActivity
+import kg.nurik.mytester.utils.PagerDecorator
 import kotlinx.android.synthetic.main.activity_questions.*
 
 class QuestionsActivity : AppCompatActivity(), PagerListener {
@@ -36,6 +42,7 @@ class QuestionsActivity : AppCompatActivity(), PagerListener {
         pager.adapter = adapter
         pager.isUserInputEnabled = false
         pager.offscreenPageLimit = 6 //по дефолту хранит в себе 6 элементов
+        pager.addItemDecoration(PagerDecorator()) // отступы для списков
 
         adapter.update(generateData())
     }
@@ -43,21 +50,38 @@ class QuestionsActivity : AppCompatActivity(), PagerListener {
     private fun generateData(): ArrayList<String> {
         val list = arrayListOf<String>()
 
+        list.add(getString(R.string.one_str))
         list.add(getString(R.string.two_str))
-        list.add("второй вопрос")
-        list.add("третий вопрос")
-        list.add("третий вопрос")
-        list.add("третий вопрос")
+        list.add(getString(R.string.three_str))
+        list.add(getString(R.string.four_str))
+        list.add(getString(R.string.five_str))
+        list.add(getString(R.string.six_str))
 
         return list
     }
 
     override fun selectAnswer(answer: Boolean, position: Int) {
-        pager.currentItem += 1
-        if (answer) questionResult += 20
+        if (answer) questionResult += 20 // если да +20 баллов , если нет то ничего
+        nextPage(position)
+    }
 
-        if (position + 1 == adapter.itemCount) {
-//            startActivity()
+    override fun selectAnswerForQuestions(points: Int, position: Int) {
+        questionResult += points
+        nextPage(position)
+    }
+
+    private fun nextPage(position: Int) {
+        pager.currentItem += 1
+
+        if (position + 1 == adapter.itemCount) { // логика такая если последний экран то запустить активи
+            val intent = Intent(this, ResultActivity::class.java)
+            intent.putExtra(POINTS, questionResult) // сюда передаем баллы
+            startActivity(intent)
+//            finish()
         }
+    }
+
+    companion object {
+        const val POINTS = "POINTS"
     }
 }

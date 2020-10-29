@@ -7,7 +7,12 @@
     <string name="next">Next</string>
     <string name="yes">ДА</string>
     <string name="no">Нет</string>
+    <string name="three_str">Контактируют ли эти\nлюди с другими\nлюдьми?</string>
     <string name="two_str">У вас есть \n хронические \n заболевания?</string>
     <string name="otven_one">Похоже, вы серьезно\nотнеслись к ситуации и соблюдаете основные меры\n предосторожности.\nПродолжайте в том же духе и скоро все закончится!</string>
     <string name="question_number">%1$d/%2$d</string>
+    <string name="one_str">У вас есть проблемыс иммунитетом?</string>
+    <string name="four_str">Контактируют ли эти люди с другими\nлюдьми?</string>
+    <string name="five_str">Используете ли вы средства защиты при выходе из дома?</string>
+    <string name="six_str">Соблюдаете ли вы карантин?</string>
 </resources>
