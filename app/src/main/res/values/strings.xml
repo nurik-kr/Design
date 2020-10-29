@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">MyTester</string>
+    <string name="tvf_first">Заболею</string>
+    <string name="tv_second">или</string>
+    <string name="tv_third">не Заболею?</string>
+    <string name="startToTest">начать тест</string>
+    <string name="next">Next</string>
+    <string name="yes">ДА</string>
+    <string name="no">Нет</string>
+    <string name="two_str">У вас есть \n хронические \n заболевания?</string>
+    <string name="otven_one">Похоже, вы серьезно\nотнеслись к ситуации и соблюдаете основные меры\n предосторожности.\nПродолжайте в том же духе и скоро все закончится!</string>
+    <string name="question_number">%1$d/%2$d</string>
+</resources>
