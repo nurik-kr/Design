@@ -4,49 +4,39 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kg.nurik.mytester.R
 import kg.nurik.mytester.question.QuestionsActivity.Companion.POINTS
+import kotlinx.android.synthetic.main.activity_result.*
 
 class ResultActivity : AppCompatActivity() {
 
-//    private val points = intent.getIntExtra(POINTS, -1)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        setContentView(R.layout.activity_result)
         val points = intent.getIntExtra(POINTS, -1)
         when {
             points <= 20 -> {
-                setContentView(R.layout.otvet_one)
-//                parentLayout.setBackgroundColor(R.drawable.bg_green_button)
+                changeFragment(R.layout.otvet_one)
             }
             points in 21..39 -> {
-                setContentView(R.layout.otvet_two)
-//                parentLayout.setBackgroundColor(R.drawable.bg_green_button)
+                changeFragment(R.layout.otvet_two)
             }
             points in 40..59 -> {
-                setContentView(R.layout.otvet_three)
-//                parentLayout.setBackgroundColor(R.drawable.bg_green_button)
+                changeFragment(R.layout.otvet_three)
             }
             points in 60..79 -> {
-                setContentView(R.layout.otvet_one)
-//                parentLayout.setBackgroundColor(R.drawable.bg_green_button)
+                changeFragment(R.layout.otvet_fourr)
+            }
+            points in 79..120 -> {
+                changeFragment(R.layout.otvet_five)
             }
         }
-//        val points = intent.getIntExtra(POINTS, -1)
+        refresh.setOnClickListener {
+            finish()
+        }
+    }
 
-//        when {
-//            points <= 20 -> {
-//                parentLayout.setBackgroundColor(R.drawable.bg_green_button)
-//            }
-//            points in 21..39 -> {
-//                parentLayout.setBackgroundColor(R.drawable.bg_green_button)
-//            }
-//            points in 40..59 -> {
-//                parentLayout.setBackgroundColor(R.drawable.bg_green_button)
-//            }
-//            points in 60..79 -> {
-//                parentLayout.setBackgroundColor(R.drawable.bg_green_button)
-//            }
-//        }
-
+    private fun changeFragment(xml: Int) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container, ResultFragment(xml))
+            .commit()
     }
 }

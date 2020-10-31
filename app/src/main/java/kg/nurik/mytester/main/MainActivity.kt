@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupListeners() {
         btnStart.setOnClickListener {
             startActivity(Intent(applicationContext, QuestionsActivity::class.java))
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         }
     }
 }

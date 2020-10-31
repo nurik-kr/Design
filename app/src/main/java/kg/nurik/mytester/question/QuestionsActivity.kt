@@ -2,12 +2,14 @@ package kg.nurik.mytester.question
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import kg.nurik.mytester.ViewPager.PagerAdapter
 import kg.nurik.mytester.ViewPager.PagerListener
 import kg.nurik.mytester.R
 import kg.nurik.mytester.result.ResultActivity
 import kg.nurik.mytester.utils.PagerDecorator
+import kg.nurik.mytester.utils.SpinnerTransformation
 import kotlinx.android.synthetic.main.activity_questions.*
 
 class QuestionsActivity : AppCompatActivity(), PagerListener {
@@ -21,13 +23,6 @@ class QuestionsActivity : AppCompatActivity(), PagerListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_questions)
         setupViewPager()
-        setupListeners()
-    }
-
-    private fun setupListeners() {
-        next.setOnClickListener {
-            pager.currentItem += 1
-        }
     }
 
     override fun onBackPressed() { // для кнопки назад
@@ -35,12 +30,14 @@ class QuestionsActivity : AppCompatActivity(), PagerListener {
             pager.currentItem -= 1
         } else {
             super.onBackPressed()
+            overridePendingTransition(R.anim.slide_left_out, R.anim.slide_right_out)
         }
     }
 
     private fun setupViewPager() {
         pager.adapter = adapter
         pager.isUserInputEnabled = false
+        pager.setPageTransformer(SpinnerTransformation())
         pager.offscreenPageLimit = 6 //по дефолту хранит в себе 6 элементов
         pager.addItemDecoration(PagerDecorator()) // отступы для списков
 
@@ -61,12 +58,16 @@ class QuestionsActivity : AppCompatActivity(), PagerListener {
     }
 
     override fun selectAnswer(answer: Boolean, position: Int) {
-        if (answer) questionResult += 20 // если да +20 баллов , если нет то ничего
+        if (position < 4 && answer) questionResult += 20 // если да +20 баллов , если нет то ничего
+        if (position >= 4 && !answer) questionResult += 20
+        Log.d("asdasd",questionResult.toString())
+
         nextPage(position)
     }
 
     override fun selectAnswerForQuestions(points: Int, position: Int) {
         questionResult += points
+        Log.d("asdasd",questionResult.toString())
         nextPage(position)
     }
 
@@ -77,7 +78,7 @@ class QuestionsActivity : AppCompatActivity(), PagerListener {
             val intent = Intent(this, ResultActivity::class.java)
             intent.putExtra(POINTS, questionResult) // сюда передаем баллы
             startActivity(intent)
-//            finish()
+            finish()
         }
     }
 
